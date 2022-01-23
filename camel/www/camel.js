@@ -3,11 +3,7 @@
 width = 592;
 height = 234;
 
-if (window.screen.width < window.screen.height) {
-	svgContainerClass = 'svg-container-desktop';
-} else {
-	svgContainerClass = 'svg-container';
-}
+svgContainerClass = 'svg-container';
 
 var svg = d3.select('body')
 	.append("div")
