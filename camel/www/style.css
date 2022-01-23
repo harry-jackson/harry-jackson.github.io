@@ -21,7 +21,7 @@ button {
 .svg-container {
   display: inline-block;
   position: relative;
-  width: 100%;
+  width: 200%;
   /*padding-bottom: 100%; /* aspect ratio */
   vertical-align: top;
   overflow: hidden;
