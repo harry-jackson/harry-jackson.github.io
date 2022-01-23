@@ -1,0 +1,44 @@
+.link {stroke: black;}
+.node {stroke: gray; stroke-width: 3px;}
+rect {stroke: black; stroke-width: 3px; fill: white;}
+circle {stroke: black; stroke-width: 3px; fill: white;}
+.active {stroke: yellow;}
+.tile {}
+td, th {
+  padding: 1px 4px;
+}
+
+button {
+	vertical-align: top;
+    /*position: absolute;*/
+}
+
+.bar {
+  fill: steelblue;
+  stroke-width: 0px;
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  /*padding-bottom: 100%; /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.svg-container-desktop {
+  display: inline-block;
+  position: relative;
+  max-height: 33%;
+  /*padding-bottom: 100%; /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.svg-content-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
