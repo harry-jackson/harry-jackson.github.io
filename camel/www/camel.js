@@ -340,11 +340,16 @@ function calc(dice, positions, stack, traps, alreadyWon){
 
 			// stack moved camel
 			if (underneath){
+				console.log("hi")
 			for (var i = 0; i < newPositions.length; i++){
+				
 				// find upmost camel at newPosition
 				if (i !== die && newPositions[i] === newPosition && newStack.indexOf(i) === -1){
-
-					newStack[die] = i;
+					var stackClimber = die;
+					while (newStack[stackClimber] >= 0) {
+						stackClimber = newStack[stackClimber];
+					}
+					newStack[stackClimber] = i;
 
 				}
 			}
