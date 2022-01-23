@@ -18,10 +18,19 @@ button {
   stroke-width: 0px;
 }
 
-.svg-container {
+.svg-container-wide {
   display: inline-block;
   position: relative;
   width: 200%;
+  /*padding-bottom: 100%; /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
   /*padding-bottom: 100%; /* aspect ratio */
   vertical-align: top;
   overflow: hidden;

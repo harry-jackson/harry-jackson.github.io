@@ -1,9 +1,16 @@
     
 
 width = 592;
-height = 234;
+height = 266;
 
-svgContainerClass = 'svg-container';
+if (window.screen.height > window.screen.width) {
+	svgContainerClass = 'svg-container-wide';
+} else {
+	svgContainerClass = 'svg-container';
+}
+
+
+
 
 var svg = d3.select('body')
 	.append("div")
@@ -12,7 +19,7 @@ var svg = d3.select('body')
 	.append('svg')
 	.attr("id", "boardsvg")
 	.attr("preserveAspectRatio", "xMidYMin meet")
-	.attr("viewBox", "0 0 592 234")
+	.attr("viewBox", "0 0 592 266")
 
 var rectWidth = 32;
 var pad_x = 32;
@@ -33,17 +40,17 @@ var dice = [];
 
 
 for (var i = 0; i < 5; i++) {
-   camels.push({id: i, y: pad_y + camelHeight * i, 
+   camels.push({id: i, y: pad_y * 2 + camelHeight * i, 
    	x: pad_x});
 
-   dice.push({id: i, x: 300 + rectWidth * i, rolled: false})
+   dice.push({id: i, x:  rectWidth * (i + 2), rolled: false})
 }
 
 path = [];
 squares = [];
 for (var i = 0; i < 16; i++){
-	path.push({x: pad_x + rectWidth * i, y: pad_y + rectWidth * 5});
-	for (var j = 0; j <6; j++){
+	path.push({x: pad_x + rectWidth * i, y: pad_y + rectWidth * 6});
+	for (var j = 0; j <7; j++){
 		squares.push({x: pad_x + rectWidth * i, y: pad_y + rectWidth * j})
 	}
 }
@@ -108,23 +115,13 @@ var theDice = svg.append('g').selectAll('rect')
 					.on('click', rollDie)
 
 
-
-tiles = [{id: 0,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'}, 
-		 {id: 1,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'}, 
-		 {id: 2,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'}, 
-		 {id: 3,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'}, 
-		 {id: 4,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'}, 
-		 {id: 5,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'}, 
-		 {id: 6,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'}, 
-		 {id: 7,tile: -1, trap: 1, home_x:rectWidth*17, home_y:rectWidth*2, color:'steelblue'},
-		 {id: 8,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'},
-		 {id: 9,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'},
-		 {id: 10,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'},
-		 {id: 11,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'},
-		 {id: 12,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'},
-		 {id: 13,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'},
-		 {id: 14,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'},
-		 {id: 15,tile: -1, trap: -1, home_x:rectWidth * 17, home_y:rectWidth * 3, color:'brown'}]
+tiles = []
+for (var i = 0; i < 8; i++){
+	tiles.push({id: i, tile: -1, trap: 1, home_x: 0, home_y: rectWidth * 0, color: 'steelblue'})
+}
+for (var i = 8; i < 16; i++){
+	tiles.push({id: i, tile: -1, trap: -1, home_x: 0, home_y: rectWidth * 1, color: 'gray'})
+}
 
 var tile = svg.append('g').selectAll('.tile')
 			.data(tiles)
@@ -168,7 +165,7 @@ function uncollide(d) {
 		for (var i = 0; i < otherCamels.length; i++){
 			moveDown = true;
 			for (var j = 0; j < camels.length; j++){
-	  		if ( otherCamels[i].y > rectWidth * 4 || (otherCamels[i].x == camels[j].x && otherCamels[i].y == camels[j].y - rectWidth)){
+	  		if ( otherCamels[i].y > rectWidth * 5 || (otherCamels[i].x == camels[j].x && otherCamels[i].y == camels[j].y - rectWidth)){
 	  			moveDown = false;
 	  			break;
 	  			
@@ -198,8 +195,8 @@ function dragged(d) {
   var x = m[0];
   var y = m[1];
   if (y >= 0 && x >= 0){
-  	var squarex = Math.min(rectWidth * Math.floor(x / rectWidth), rectWidth * 16)
-  	var squarey = Math.min(rectWidth * Math.floor(y / rectWidth), rectWidth*5)
+  	var squarex = Math.max(rectWidth, Math.min(rectWidth * Math.floor(x / rectWidth), rectWidth * 16))
+  	var squarey = Math.min(rectWidth * Math.floor(y / rectWidth), rectWidth*6)
 
   	//d3.select(this).attr('transform', function(d) {return "translate(" + d.x + "," + d.y+ ")"});
 	d.x = squarex;
@@ -231,9 +228,9 @@ function tiledragged(d, i){
 	var m = d3.mouse(document.getElementById('boardsvg'));
 	var x = m[0]
 	var y = m[1]
-	if (y > rectWidth * 5){
-		x = Math.min(rectWidth * Math.floor(x / rectWidth), rectWidth * 16)
-  		y = rectWidth * 6;
+	if (y > rectWidth * 6){
+		x = Math.max(rectWidth, Math.min(rectWidth * Math.floor(x / rectWidth), rectWidth * 16))
+  		y = rectWidth * 7;
   		tiles[i].tile = (x) / rectWidth;
 	}
 	d3.select(this).attr('x', x).attr('y', y);
@@ -245,7 +242,7 @@ function tiledragended(d, i){
 	var y = m[1]
 	tile_clash = tiles.filter((tile) => tile.tile >= tiles[i].tile - 1 && tile.tile <= tiles[i].tile + 1).length > 1
 	camel_clash = camels.filter((camel) => camel.x === tiles[i].tile * rectWidth).length > 0
-	if (camel_clash || tile_clash || y <= rectWidth * 5){
+	if (camel_clash || tile_clash || y <= rectWidth * 6){
 		tiles[i].tile = -1;
 		d3.select(this).attr('x', function(d) {return d.home_x})
 			.attr('y', function(d) {return d.home_y});
@@ -551,7 +548,7 @@ d3.select('body').append("p")
 
 var svg_hist = d3.select('body')
 .append("div")
-.classed(svgContainerClass, true)
+.classed('svg-container', true)
 .append('svg')
 .attr("preserveAspectRatio", "xMidYMin meet")
 .attr("viewBox", "0 0 " + hist_width + " " + hist_height)
