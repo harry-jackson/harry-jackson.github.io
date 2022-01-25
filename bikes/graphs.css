@@ -1,0 +1,46 @@
+.bar {
+	  fill: steelblue;
+	}
+
+	.line {
+    fill: none;
+    stroke: salmon;
+    stroke-width: 2;
+}
+
+.marker {
+	fill: none;
+	stroke: grey;
+	stroke-width: 2;
+}
+
+.markertext {
+	font-size: "100px";
+	font-family: 'Arial';
+	
+}
+
+.arrow {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 2;
+}
+
+.line2 {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 2;
+}
+
+.area {
+  fill: lightsteelblue;
+}
+
+.dot {
+	stroke-width: 0px;
+	fill-opacity: 1;
+}
+
+#mapid { height: 300px; }
+
+#attribution {line-height: 50%;}

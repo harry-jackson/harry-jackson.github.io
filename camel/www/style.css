@@ -9,13 +9,16 @@ td, th {
 }
 
 button {
-	vertical-align: top;
+  vertical-align: top;
     /*position: absolute;*/
 }
 
 .bar {
   fill: steelblue;
   stroke-width: 0px;
+}
+
+.results-table{
 }
 
 .svg-container-wide {
@@ -31,7 +34,7 @@ button {
   display: inline-block;
   position: relative;
   width: 100%;
-  /*padding-bottom: 100%; /* aspect ratio */
+  /*padding-top: 40%; /* aspect ratio */
   vertical-align: top;
   overflow: hidden;
 }

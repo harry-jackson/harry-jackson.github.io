@@ -1,4 +1,10 @@
-    
+
+
+// screen orientation
+// resize table / button
+// format table
+// change tiles to click
+// camel hitboxes
 
 width = 592;
 height = 266;
@@ -483,7 +489,7 @@ table_data = [['<img src="www/camel0.png" height = 32 width = 32>', "", "", "", 
 // the columns you'd like to display
 var columns = ["", "EV(5)", "EV(3)", "EV(2)", "_____", "P(1st)", "P(2nd)", "P(3rd-5th)"];
 
-var table = d3.select("body").append("table"),
+var table = d3.select("body").append("div").classed("results-table", true).append("table"),
 	thead = table.append("thead"),
 	tbody = table.append("tbody");
 	
@@ -535,7 +541,7 @@ function updateTableData() {
 }
 
 function simulate(){
-	
+	svg.style("width", "50%")
 	allPositions = [];
 	allResults = [[0, 0, 0], [0, 0, 0], [0, 0, 0],[0, 0, 0], [0, 0, 0]];
 	getResults();
